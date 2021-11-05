@@ -23,6 +23,7 @@ Widget defaultTextFormField({
       onChanged: onChange,
       validator: validate,
       onTap: onTab,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: prefix,
