@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/shared/cubit/cubit.dart';
 
 Widget defaultTextFormField({
@@ -38,8 +39,6 @@ Widget defaultTextFormField({
     );
 
 Widget buildTaskItem({
-  double? height,
-  double? width,
   Map? model,
   context,
   bool? isDone,
@@ -49,23 +48,23 @@ Widget buildTaskItem({
     key: Key(model!['id'].toString()),
     child: Padding(
       padding: EdgeInsets.symmetric(
-        vertical: height! * 0.01,
-        horizontal: width! * 0.01,
+        vertical: 10.h,
+        horizontal: 12.w,
       ),
       child: Row(
         children: [
           CircleAvatar(
-            radius: width * 0.11,
+            radius: 37.r,
             child: Text(
               '${model['time']}',
               style: TextStyle(
-                fontSize: width * 0.044,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           SizedBox(
-            width: width * 0.025,
+            width: 10.w,
           ),
           Expanded(
             child: Column(
@@ -76,22 +75,27 @@ Widget buildTaskItem({
                   '${model['title']}',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: width * 0.07,
+                    fontSize: 24.sp,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: 5.h,
                 ),
                 Text(
                   '${model['date']}',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     color: Colors.grey[600],
-                    fontSize: width * 0.05,
+                    fontSize: 20.sp,
                   ),
                 ),
               ],
             ),
           ),
           SizedBox(
-            width: width * 0.08,
+            width: 20.w,
           ),
           Visibility(
             visible: isDone!,
@@ -107,7 +111,7 @@ Widget buildTaskItem({
               icon: Icon(
                 Icons.done,
                 color: Colors.green,
-                size: width * 0.1,
+                size: 34.w,
               ),
             ),
           ),
@@ -125,7 +129,7 @@ Widget buildTaskItem({
               icon: Icon(
                 Icons.archive,
                 color: Colors.black26,
-                size: width * 0.09,
+                size: 30.w,
               ),
             ),
           ),

@@ -23,10 +23,9 @@ class AppCubit extends Cubit<AppStates> {
   late Database database;
   bool isDone = true;
   bool isArchive = true;
-
-  late List<Map> newtasks = [];
-  late List<Map> donetasks = [];
-  late List<Map> archivetasks = [];
+  late List<Map> newTasks = [];
+  late List<Map> doneTasks = [];
+  late List<Map> archiveTasks = [];
   bool isBottomSheetShown = false;
   IconData fabIcon = Icons.edit;
   void changeIndex(int index) {
@@ -108,19 +107,19 @@ class AppCubit extends Cubit<AppStates> {
 
   void getDataFromDatabase(database) async {
     emit(AppChangeTaskStatusState());
-    newtasks = [];
-    donetasks = [];
-    archivetasks = [];
+    newTasks = [];
+    doneTasks = [];
+    archiveTasks = [];
     emit(AppGetDatabaseLoadingState());
     database.rawQuery('SELECT * FROM tasks').then(
       (value) {
         value.forEach((element) {
           if (element['status'] == 'New')
-            newtasks.add(element);
+            newTasks.add(element);
           else if (element['status'] == 'done')
-            donetasks.add(element);
+            doneTasks.add(element);
           else
-            archivetasks.add(element);
+            archiveTasks.add(element);
         });
         emit(AppGetDatabaseState());
       },

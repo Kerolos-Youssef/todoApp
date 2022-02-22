@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/shared/components/components.dart';
 import 'package:todo/shared/cubit/cubit.dart';
 import 'package:todo/shared/cubit/states.dart';
@@ -13,47 +14,46 @@ class ArchivedTasksScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return BlocConsumer<AppCubit, AppStates>(
       builder: (context, state) {
-        return AppCubit.get(context).archivetasks.length > 0
+        return AppCubit.get(context).archiveTasks.length > 0
             ? ListView.separated(
                 itemBuilder: (context, index) => buildTaskItem(
-                  height: h,
-                  width: w,
-                  model: AppCubit.get(context).archivetasks[index],
+                  model: AppCubit.get(context).archiveTasks[index],
                   context: context,
                   isDone: AppCubit.get(context).isDone = true,
                   isArchive: AppCubit.get(context).isArchive = false,
                 ),
                 separatorBuilder: (context, index) => Container(
                   width: double.infinity,
-                  height: 1,
+                  height: 1.8.h,
                   color: Colors.grey[400],
                 ),
-                itemCount: AppCubit.get(context).archivetasks.length,
+                itemCount: AppCubit.get(context).archiveTasks.length,
               )
             : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.highlight_off,
-                      size: w * 0.3,
-                      color: Colors.grey,
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        start: w * 0.06,
-                        end: w * 0.06,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.highlight_off,
+                        size: 100.w,
+                        color: Colors.grey,
                       ),
-                      child: Text(
-                        'No tasks archived Yet!',
-                        style: TextStyle(
-                          fontSize: w * 0.1,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 26.w,
+                        ),
+                        child: Text(
+                          'No tasks archived Yet!',
+                          style: TextStyle(
+                            fontSize: 40.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
       },
